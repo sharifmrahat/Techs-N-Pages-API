@@ -6,7 +6,7 @@ exports.createUserService = async (data) => {
 };
 
 exports.findOneUserService = async (data) => {
-  const user = await User.findOne({ ...data });
+  const user = await User.findOne({ email: data?.email });
   return user;
 };
 
