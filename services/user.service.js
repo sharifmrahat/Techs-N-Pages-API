@@ -11,7 +11,9 @@ exports.findOneUserService = async (data) => {
 };
 
 exports.updateOneUserService = async (data) => {
-  const user = await User.updateOne({ email: data.email }, data.body);
+  const user = await User.updateOne({ email: data.email }, data.body, {
+    runValidators: true,
+  });
   return user;
 };
 

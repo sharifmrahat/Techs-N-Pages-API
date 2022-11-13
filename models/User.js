@@ -65,7 +65,7 @@ const userSchema = mongoose.Schema(
 );
 
 
-duplicateHandler(userSchema, 'User is already exist with this email: {VALUE}')
+// duplicateHandler(userSchema, 'User is already exist with this email: {VALUE}')
 
 
 userSchema.pre("save", function (next) {
