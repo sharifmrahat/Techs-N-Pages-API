@@ -45,6 +45,15 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.getAllUser = async (req, res, next) => {
+  try {
+    const users = await userService.findAllUserService();
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.getCurrentUser = async (req, res, next) => {
   try {
     const { email } = req.user;

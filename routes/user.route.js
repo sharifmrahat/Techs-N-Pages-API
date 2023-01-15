@@ -12,6 +12,8 @@ router.get("/currentUser", verifyToken, userController.getCurrentUser);
 
 router.route("/update").patch(verifyToken, userController.updateUser);
 
+
+router.get("/all", verifyToken, authorization("admin"), userController.getAllUser);
 router
   .route("/update/role/:id")
   .patch(verifyToken, authorization("admin"), userController.updateUserRole);

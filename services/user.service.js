@@ -10,6 +10,11 @@ exports.findOneUserService = async (data) => {
   return user;
 };
 
+exports.findAllUserService = async () => {
+  const users = await User.find();
+  return users;
+};
+
 exports.updateOneUserService = async (data) => {
   const user = await User.updateOne({ email: data.email }, data.body, {
     runValidators: true,
