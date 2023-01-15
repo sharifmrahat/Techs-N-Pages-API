@@ -48,7 +48,19 @@ exports.login = async (req, res, next) => {
 exports.getAllUser = async (req, res, next) => {
   try {
     const users = await userService.findAllUserService();
-    res.status(200).json({ success: true, data: users });
+
+    const data = users.map(user => ({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user?.role,
+      imageURL: user?.imageURL,
+      isActive: user.isActive,
+      createdAt: user.createdAt,
+      updatedAt: user?.updatedAt,
+    }));
+
+    res.status(200).json({ success: true, data: data });
   } catch (error) {
     next(error);
   }
