@@ -98,7 +98,7 @@ exports.updateUser = async (req, res, next) => {
 
 
 
-    const { name, email, currentPassword, newPassword, confirmNewPassword } =
+    const { name, email, imageURL, currentPassword, newPassword, confirmNewPassword } =
       req.body;
 
     const data = {
@@ -106,6 +106,7 @@ exports.updateUser = async (req, res, next) => {
       body: {
         name: name ?? loggedUser?.name,
         email: email ?? loggedEmail,
+        imageURL: imageURL
       },
     };
 
