@@ -1,10 +1,14 @@
 const userService = require("../services/user.service");
 const { generateToken } = require("../utils/token");
 const bcrypt = require("bcryptjs");
+const bagService = require("../services/bag.services");
 
 exports.signup = async (req, res, next) => {
   try {
     const newUser = await userService.createUserService(req.body);
+    if(newUser){
+      await bagService.createBagService({items: [], user: {_id: newUser._id, email: newUser.email}})
+    }
     const { password, ...data } = newUser.toObject();
     res.status(200).json({ success: true, data: data });
   } catch (error) {
