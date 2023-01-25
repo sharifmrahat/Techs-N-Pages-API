@@ -31,7 +31,17 @@ exports.updateBag = async (req, res, next) => {
       const data = {
         bagId: req?.params.bagId,
         itemId: req?.params.itemId,
-        body: req?.body,
+        quantity: req?.body.quantity,
+      }
+
+      const bag = await bagService.findOneBagService(data.bagId)
+      if(bag?.user?.email !== loggedUser?.email){
+        return res
+          .status(400)
+          .json({
+            success: false,
+            error: "You're not authorized to access the bag",
+          });
       }
       const updatedBag = await bagService.updateBagService(data);
   
