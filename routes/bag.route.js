@@ -7,4 +7,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 // router.route("/add").post(verifyToken, bagController.createBag);
 
 
+router.route("/update/:bagId/:itemId").patch(verifyToken, bagController.updateBag);
+
+
 module.exports = router;
