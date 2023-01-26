@@ -25,4 +25,10 @@ exports.updateBagItemService = async (data) => {
     return bag;
   };
 
+  exports.deleteBagItemService = async (data) => {
+    const query = {_id: data.bagId}
+    const updateData = {$pull: {items: {_id: data.itemId}}};
+      const bag = await Bag.updateOne(query, updateData)    
+      return bag;
+    };
 

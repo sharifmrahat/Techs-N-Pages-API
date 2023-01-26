@@ -13,5 +13,7 @@ router.get("/myBag/:id", verifyToken, bagController.getMyBag);
 
 router.route("/update/:bagId/:itemId").patch(verifyToken, bagController.updateBagItem);
 
+router.route("/delete/:bagId/:itemId").patch(verifyToken, bagController.deleteBagItem);
+
 
 module.exports = router;

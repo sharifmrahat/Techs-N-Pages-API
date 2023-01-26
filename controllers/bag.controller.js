@@ -40,7 +40,6 @@ exports.addToBag = async (req, res, next) => {
     const loggedUser = await userService.findOneUserService({
       email: loggedEmail,
     });
-    console.log(loggedUser)
     if (loggedUser.email !== loggedEmail) {
       return res
         .status(400)
@@ -133,11 +132,9 @@ exports.updateBagItem = async (req, res, next) => {
 exports.deleteBagItem = async (req, res, next) => {
     try {
       const loggedEmail = req.user?.email;
-      console.log(loggedEmail)
       const loggedUser = await userService.findOneUserService({
         email: loggedEmail,
       });
-      console.log(loggedUser)
       if (loggedUser.email !== loggedEmail) {
         return res
           .status(400)
@@ -149,7 +146,7 @@ exports.deleteBagItem = async (req, res, next) => {
   
       const data = {
         bagId: req?.params.bagId,
-        item: req?.body
+        itemId: req?.params.itemId
       }
   
       const bag = await bagService.findOneBagService(data.bagId)
@@ -162,23 +159,14 @@ exports.deleteBagItem = async (req, res, next) => {
             error: "You're not authorized to access the bag",
           });
       }
-      const itemExist = bag?.items?.find(item => item.uid === data.item.uid)
-      if(itemExist){
-        return res
-        .status(400)
-        .json({
-          success: false,
-          error: data.item.name+' is already added to your bag',
-        });
-      }
-      const updatedBagItems = await bagService.addToBagService(data);
+      const deleteBagItems = await bagService.deleteBagItemService(data);
   
-      if (!updatedBagItems.modifiedCount) {
+      if (!deleteBagItems.modifiedCount) {
         return res
           .status(400)
           .json({ success: false, error: "Nothing has modified" });
       }
-      res.status(200).json({ success: true, data: updatedBagItems });
+      res.status(200).json({ success: true, data: deleteBagItems });
     } catch (error) {
       next(error);
     }
