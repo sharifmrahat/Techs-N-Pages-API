@@ -16,16 +16,13 @@ const reviewSchema = mongoose.Schema(
         type: String,
         required: true
     },
-    user: {
+    userInfo: {
         _id: {
         type: ObjectId,
-        ref: "User",
-        unique: true,
         required: true
       },
       email: {
           type: String,
-          unique: true,
           required: true
         },
       },

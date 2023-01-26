@@ -9,4 +9,8 @@ router.route("/create").post(verifyToken, reviewController.createReview);
 router.get("/my", verifyToken, reviewController.getMyReviews);
 router.get("/get/:bookId", verifyToken, reviewController.getReviewsByBookId);
 
+
+router.route("/update/:id").patch(verifyToken, reviewController.updateMyReview);
+router.route("/delete/:id").delete(verifyToken, reviewController.deleteMyReview);
+
 module.exports = router;

@@ -11,6 +11,21 @@ exports.getReviewsByBookIdService = async (id) => {
 };
 
 exports.getMyReviewsService = async (id) => {
-  const myReviews = await Review.find({"user._id": id});
+  const myReviews = await Review.find({"userInfo._id": id});
   return myReviews;
+};
+
+exports.getMyExistingReviewService = async (data) => {
+  const myReview = await Review.findOne({$and: [{"userInfo._id": data.userId}, {bookId: data.bookId}]});
+  return myReview;
+};
+
+exports.updateMyReviewService = async (data) => {
+  const updateReview = await Review.updateOne({_id: data.id}, data.body);
+  return updateReview;
+};
+
+exports.deleteMyReviewService = async (id) => {
+  const deleteReview = await Review.deleteOne({_id: id});
+  return deleteReview;
 };
