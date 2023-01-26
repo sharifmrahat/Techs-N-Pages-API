@@ -6,5 +6,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 router.route("/create").post(verifyToken, reviewController.createReview);
 
+router.get("/my", verifyToken, reviewController.getReviewsByBookId);
+router.get("/get/:bookId", verifyToken, reviewController.getReviewsByBookId);
 
 module.exports = router;

@@ -11,3 +11,13 @@ exports.createReview = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getReviewsByBookId = async (req, res, next) => {
+  try {
+    const {bookId} = req.params
+    const reviews = await reviewService.getReviewsByBookIdService(bookId)
+    res.status(200).json({ success: true, data: reviews });
+  } catch (error) {
+    next(error)
+  }
+}
