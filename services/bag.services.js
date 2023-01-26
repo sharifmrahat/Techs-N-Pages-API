@@ -11,12 +11,8 @@ exports.findOneBagService = async (id) => {
 };
 
 exports.updateBagService = async (data) => {
-
-  const query = { _id: data.bagId, "items._id": data.itemId };
-  const updateData = {
-    $set: { "items.$.quantity": data.quantity }
-  };
-  console.log(query, updateData)
+  const query = {_id: data.bagId, "items._id": data.itemId}
+  const updateData = {$set: {"items.$.quantity": data.quantity}};
     const bag = await Bag.updateOne(query, updateData)    
     return bag;
   };
