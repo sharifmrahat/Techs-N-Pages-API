@@ -10,9 +10,19 @@ exports.findOneBagService = async (id) => {
   return bag;
 };
 
+exports.addToBagService = async (data) => {
+  const query = {_id: data.bagId}
+  const updateData = {$push: {items: data}};
+    const bag = await Bag.insertOne(query, updateData)    
+    return bag;
+  };
+
+
 exports.updateBagService = async (data) => {
   const query = {_id: data.bagId, "items._id": data.itemId}
   const updateData = {$set: {"items.$.quantity": data.quantity}};
     const bag = await Bag.updateOne(query, updateData)    
     return bag;
   };
+
+

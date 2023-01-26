@@ -6,6 +6,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 // router.route("/add").post(verifyToken, bagController.createBag);
 
+router.get("/myBag/:id", verifyToken, bagController.getMyBag);
 
 router.route("/update/:bagId/:itemId").patch(verifyToken, bagController.updateBag);
 
